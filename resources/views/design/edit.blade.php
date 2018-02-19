@@ -50,6 +50,10 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .pointer{
+                cursor: pointer;
+            }
         </style>
 @section('content')
         <div class="flex-center position-ref full-height">
@@ -74,8 +78,13 @@
                                     {!! Form::text('design') !!}
                                     <div class="input-field col s12">
                                     {!! Form::select('aplicacions[]', 
-                                    $data['aplicacion']) !!}
+                                    $data['aplicacion'], 'default',array('id' => 'appSlc')) !!}
                                     {!! Form::label('aplicacions') !!}
+                                    <a href="#add-app" id="add-app-trigger">
+                                        <i class="material-icons pointer modal-trigger">
+                                            add
+                                        </i>                                        
+                                    </a>
                                     </div>
                                     <div class="input-field col s12">
                                     {!! Form::select('fabricantes[]', 
@@ -90,4 +99,77 @@
                         </div>
                       </div>
                 </div>
-@endsection
+                <!-- MODAL SECTION -->
+
+                <!-- ADD APP MODAL -->
+                  <div id="app-modal" class="modal modal-fixed-footer">
+                    <div class="modal-content" id="app-content">
+                      
+                    </div>
+                    <div class="modal-footer">
+                      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+                    </div>
+                  </div>
+
+                <script type="text/javascript">
+                    $( document ).ready(function() {
+
+                        //initialize all modals           
+                        $('.modal').modal();
+
+                        
+                        $( "#add-app-trigger" ).click(function() {
+
+                            $.get( "/bodega/dashboard/add/aplicacion", {} )
+                              .done(function( data ) {
+
+
+                                $( "#app-content" ).append(data);
+
+                                //CREATING FUNCTION TO PREVENT SUBMIT AFTER APPEND THE FORM
+                                $("#appForm").submit(function(e){
+                                    e.preventDefault();
+
+                                    var app = $("#aplicacion").val();
+
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        }
+                                    });
+
+                                    $.ajax({
+                                      type: "POST",
+                                      url: "/bodega/dashboard/add/aplicacion",
+                                      success: function(response){
+                                                console.log(response);
+                                          //      $('#selecId').append($('<option>', {
+                                          //          value: response.id,
+                                         //           text: app
+                                          //      }));
+
+                                                //$('#selecId option:eq('response.id')'); //SELEC THE OPTION REGISTERED
+
+                                                //CLOSE MODAL
+                               $('#app-modal').modal('close');
+
+                                     },
+                                      data: {
+                                        "aplicacion": app
+                                      }
+                                      ,
+                                      dataType: "json"
+                                    });
+                                });
+
+                              });
+
+                                //now you can open modal from code
+                               $('#app-modal').modal('open');
+                        });// Handler for .ready() called.
+                    
+                    });
+    
+                </script>
+
+@endsection 

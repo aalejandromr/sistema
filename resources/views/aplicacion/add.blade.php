@@ -68,12 +68,12 @@
                           <div class="card z-depth-4">
                             <div class="card-content">
                               <div class="row" style="margin-bottom: 0px !important;">
-                                {!! Form::model($aplicacion, ['method' => 'POST', 'action' => ['AplicacionController@store']]) !!}
+                                {!! Form::model($aplicacion, ['method' => 'POST', 'action' => ['AplicacionController@store'],'id' => 'appForm']) !!}
                                 <div class="input-field">
                                     {!! Form::token() !!}
                                     {!! Form::label('aplicacion', 'Nombre Aplicacion') !!}
                                     {!! Form::text('aplicacion') !!}
-                                    {{ Form::button('<i class="material-icons right">send</i> Enviar', ['type' => 'submit', 'class' => 'btn waves-effect waves-light'] )  }}   
+                                    {{ Form::button('<i class="material-icons right" id="submitter">send</i> Enviar', ['type' => 'submit', 'class' => 'btn waves-effect waves-light'] )  }}   
                                 </div>
                                 {!! Form::close() !!}
                                   </div>
