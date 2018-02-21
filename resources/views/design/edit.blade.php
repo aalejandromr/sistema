@@ -78,9 +78,9 @@
                                     {!! Form::text('design') !!}
                                     <div class="input-field col s12">
                                     {!! Form::select('aplicacions[]', 
-                                    $data['aplicacion'], 'default',array('id' => 'appSlc')) !!}
+                                    $data['aplicacion'], null,array('id' => 'appSlc')) !!}
                                     {!! Form::label('aplicacions') !!}
-                                    <a href="#add-app" id="add-app-trigger">
+                                    <a id="add-app-trigger">
                                         <i class="material-icons pointer modal-trigger">
                                             add
                                         </i>                                        
@@ -88,8 +88,13 @@
                                     </div>
                                     <div class="input-field col s12">
                                     {!! Form::select('fabricantes[]', 
-                                    $data['fabricantes']) !!}
+                                    $data['fabricantes'], null,array('id' => 'fabriSlc')) !!}
                                     {!! Form::label('fabricantes') !!}
+                                    <a id="add-fabricante-trigger">
+                                        <i class="material-icons pointer modal-trigger">
+                                            add
+                                        </i>                                        
+                                    </a>
                                     </div>
                                     {{ Form::button('<i class="material-icons right">send</i> Editar', ['type' => 'submit', 'class' => 'btn waves-effect waves-light'] )  }}    
                                 {!! Form::close() !!}
@@ -102,13 +107,13 @@
                 <!-- MODAL SECTION -->
 
                 <!-- ADD APP MODAL -->
-                  <div id="app-modal" class="modal modal-fixed-footer">
-                    <div class="modal-content" id="app-content">
-                      
-                    </div>
-                    <div class="modal-footer">
-                      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-                    </div>
+                  <div id="app-modal" class="modal">
+                    
+                  </div>
+
+                <!-- ADD APP MODAL -->
+                  <div id="fabricante-modal" class="modal">
+                    
                   </div>
 
                 <script type="text/javascript">
@@ -124,7 +129,7 @@
                               .done(function( data ) {
 
 
-                                $( "#app-content" ).append(data);
+                                $( "#app-modal" ).append(data);
 
                                 //CREATING FUNCTION TO PREVENT SUBMIT AFTER APPEND THE FORM
                                 $("#appForm").submit(function(e){
@@ -142,16 +147,23 @@
                                       type: "POST",
                                       url: "/bodega/dashboard/add/aplicacion",
                                       success: function(response){
-                                                console.log(response);
-                                          //      $('#selecId').append($('<option>', {
-                                          //          value: response.id,
-                                         //           text: app
-                                          //      }));
 
-                                                //$('#selecId option:eq('response.id')'); //SELEC THE OPTION REGISTERED
+                                       $('#appSlc').append($('<option>', {
+                                           value: response.id,
+                                           text: app
+                                       }));
 
-                                                //CLOSE MODAL
-                               $('#app-modal').modal('close');
+                                        //CHOOSE THE OPTION
+                                        $("#appSlc option[value='"+response.id+"']").prop('selected', true);
+                                        
+
+                                        // $('#appSlc').trigger('contentChanged');
+                                        $('#appSlc').material_select();
+
+                                        //CLOSE MODAL
+                                       $('#app-modal').modal('close');
+                                       
+                                       Materialize.toast("Data inserted successfully!" , 3000, 'rounded blue darken-4');
 
                                      },
                                       data: {
@@ -166,9 +178,73 @@
 
                                 //now you can open modal from code
                                $('#app-modal').modal('open');
-                        });// Handler for .ready() called.
+                        });//FINAL CLICK APP-MODAL
+
+
+                        //FABRICANTE SECTION
+                        $( "#add-fabricante-trigger" ).click(function() {
+
+                            $.get( "/bodega/dashboard/add/fabricante", {} )
+                              .done(function( data ) {
+
+
+                                $( "#fabricante-modal" ).append(data);
+
+                                //CREATING FUNCTION TO PREVENT SUBMIT AFTER APPEND THE FORM
+                                $("#fabriForm").submit(function(e){
+                                    e.preventDefault();
+
+                                    var attri = $("#name").val();
+
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        }
+                                    });
+
+                                    $.ajax({
+                                      type: "POST",
+                                      url: "/bodega/dashboard/add/fabricante",
+                                      success: function(response){
+                                            $('#fabriSlc').append($('<option>', {
+                                           value: response.id,
+                                           text: attri
+                                       }));
+
+                                        //CHOOSE THE OPTION
+                                        $("#fabriSlc option[value='"+response.id+"']").prop('selected', true);
+                                        
+
+                                        // $('#appSlc').trigger('contentChanged');
+                                        $('#fabriSlc').material_select();
+
+                                        //CLOSE MODAL
+                                       $('#fabricante-modal').modal('close');
+                                       
+                                       Materialize.toast("Data inserted successfully!" , 3000, 'rounded blue darken-4');
+
+                                     },
+                                      data: {
+                                        "name": attri
+                                      }
+                                      ,
+                                      dataType: "json"
+                                    });
+                                });
+
+                              });
+
+                                //now you can open modal from code
+                               $('#fabricante-modal').modal('open');
+                        });//FINAL CLICK APP-MODAL
+
+
+                        $('#appSlc').on('contentChanged', function() {
+                          // re-initialize (update)
+                          $(this).material_select();
+                        });                        
                     
-                    });
+                    });// Handler for .ready() called.
     
                 </script>
 

@@ -69,7 +69,7 @@
                             <div class="card-content">
                                 <h4>Agrega Nuevo Diseño</h4>
                               <div class="row" style="margin-bottom: 0px !important;">
-                                {!! Form::model($data['design'], ['method' => 'POST', 'action' => ['DesignController@store']]) !!}
+                                {!! Form::model($data['design'], ['method' => 'POST', 'action' => ['DesignController@store'],'id' => 'designForm']) !!}
                                 <div class="input-field">
                                     {!! Form::token() !!}
                                     {!! Form::label('design', 'Nombre Diseño') !!}

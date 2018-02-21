@@ -68,10 +68,10 @@
                           <div class="card z-depth-4">
                             <div class="card-content">
                               <div class="row" style="margin-bottom: 0px !important;">
-                                {!! Form::model($medida, ['method' => 'POST', 'action' => ['MedidaController@store']]) !!}
+                                {!! Form::model($medida, ['method' => 'POST', 'action' => ['MedidaController@store'],'id' => 'medidaForm']) !!}
                                 <div class="input-field">
                                     {!! Form::token() !!}
-                                    {!! Form::label('medida', 'Nombre Marca') !!}
+                                    {!! Form::label('medida', 'Nombre Medida') !!}
                                     {!! Form::text('medida') !!}
 
                                     {{ Form::button('<i class="material-icons right">send</i> Enviar', ['type' => 'submit', 'class' => 'btn waves-effect waves-light'] )  }}   

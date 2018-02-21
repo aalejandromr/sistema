@@ -59,7 +59,7 @@ class AplicacionController extends Controller
         if($validator->fails()){
                 
             if($request->ajax()){
-                return false;
+                return array('success' => false)
             }else{
                 return Redirect::to('add-aplicacion')
                 ->withErrors($validator);    

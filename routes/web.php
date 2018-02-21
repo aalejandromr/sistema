@@ -46,7 +46,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 	Route::get('bodega/dashboard/medidas', 'MedidaController@index')->name('all-medidas');
 	Route::get('bodega/dashboard/add/medida', 'MedidaController@create')->name('add-medida');
-	Route::post('bodega/dashboard/add/medida', 'MedidaController@store')->name('add-medida');
+	Route::post('bodega/dashboard/add/medida', 'MedidaController@store')->name('add-medida');//find
 	Route::get('bodega/dashboard/edit/medida/{id}', 'MedidaController@edit')->name('edit-medida');
 	Route::patch('bodega/dashboard/update/{id}', 'MedidaController@update')->name('update-medida');
 	Route::get('bodega/dashboard/delete/{id}', 'MedidaController@delete')->name('delete-medida');
@@ -66,7 +66,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('bodega/dashboard/delete/tipo/{id}', 'TipoController@delete')->name('delete-tipo');
 
 	Route::get('bodega/dashboard/fabricantes', 'FabricanteController@index')->name('all-fabricantes');
-	Route::get('bodega/dashboard/add/fabricante', 'FabricanteController@create')->name('add-fabricante');
+	Route::get('bodega/dashboard/add/fabricante', 'FabricanteController@create')->name('add-fabricante');//find
 	Route::post('bodega/dashboard/add/fabricante', 'FabricanteController@store')->name('add-fabricante');
 	Route::get('bodega/dashboard/edit/fabricante/{id}', 'FabricanteController@edit')->name('edit-fabricante');
 	Route::patch('bodega/dashboard/update/fabricante/{id}', 'FabricanteController@update')->name('update-fabricante');

@@ -28,10 +28,16 @@ class FabricanteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
         $fabricante = new Fabricante;
+
+         if($request->ajax()){
+
+            return view('fabricante.add', compact('fabricante'))->renderSections()['content'];
+        }
+   
         return view('fabricante.add')->with('fabricante', $fabricante);
     }
 
@@ -48,16 +54,33 @@ class FabricanteController extends Controller
             'name' => 'required'
         );
 
+
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails()){
+             if($request->ajax()){
+                return false;
+            }else{
             return Redirect::to('add-fabricante')
                 ->withErrors($validator);
+            }
         }
         else {
+
             $fabricante = new Fabricante;
-            $fabricante->name = $request->name;
-            $fabricante->save();
-            return Redirect::to('bodega/dashboard/fabricantes')->with('message', 'fabricante agregado.');
+
+            if($request->ajax()){
+
+                $fabricante->name = $request->name;
+                if($fabricante->save()) {
+                    return array('success' => true, 'id' => $fabricante->id);
+                }
+
+            }else {
+
+                $fabricante->name = $request->name;
+                $fabricante->save();
+                return Redirect::to('bodega/dashboard/fabricantes')->with('message', 'fabricante agregado.');
+            }
         }
     }
 

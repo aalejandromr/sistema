@@ -27,10 +27,15 @@ class MedidaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
         $medida = new Medida;
+
+        if($request->ajax()){
+            return view('medida.add', compact('medi'))->with('medida', $medida)->renderSections()['content'];
+        }
+
         return view('medida.add')->with('medida', $medida);
     }
 
@@ -54,9 +59,19 @@ class MedidaController extends Controller
         }
         else {
             $medida = new Medida;
-            $medida->medida = $request->medida;
-            $medida->save();
-            return Redirect::to('bodega/dashboard/medidas')->with('message', 'Medida agregada.');
+
+            if($request->ajax()){
+                $medida->marca = $request->medida;
+                if($medida->save()) {
+                    return array('success' => true, 'id' => $medida->id);
+                }
+
+            }else {
+
+                $medida->medida = $request->medida;
+                $medida->save();
+                return Redirect::to('bodega/dashboard/medidas')->with('message', 'Medida agregada.');
+            }
         }
     }
 

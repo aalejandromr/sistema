@@ -68,7 +68,8 @@
                           <div class="card z-depth-4">
                             <div class="card-content">
                               <div class="row" style="margin-bottom: 0px !important;">
-                                {!! Form::model($aplicacion, ['method' => 'POST', 'action' => ['AplicacionController@store'],'id' => 'appForm']) !!}
+                              
+                                {!! Form::model($aplicacion, ['method' => 'POST', 'action' => ['AplicacionController@store'],'id' => 'appForm']}) !!}
                                 <div class="input-field">
                                     {!! Form::token() !!}
                                     {!! Form::label('aplicacion', 'Nombre Aplicacion') !!}
