@@ -9,10 +9,15 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
         {!! MaterializeCSS::include_css() !!}
-    
+    <link rel="stylesheet" type="text/css" href="/css/jquery-ui.min.css">
     <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>{{ config('app.name', 'Laravel') }}</title>
+                <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+              <link rel="stylesheet" href="/resources/demos/style.css">
+              <style>
+              #draggable { width: 150px; height: 150px; padding: 0.5em; }
+              </style>
 
 </head>
 <body>
@@ -69,11 +74,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     {!! MaterializeCSS::include_js() !!}
     <script type="text/javascript">
         $(document).ready(function(){
             $(".dropdown-button").dropdown();
-
                   
             if($('.message').length > 0){
                 if($('.message').attr("data-type") == "success"){

@@ -122,7 +122,6 @@
 
         <script type="text/javascript">
             $(document).ready(function(){
-                console.log($('select[name="designs[]"]'));
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
