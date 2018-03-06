@@ -1,10 +1,17 @@
 <?php
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$a = getenv('CLEARDB_DATABASE_URL');
+$host     = '127.0.0.1';
+$username = 'forge';
+$password = '';
+$database = 'forge';
+if ($a) {
+    $url = $a;
 
-$host     = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
+    $host     = $url["host"];
+    $username = $url["user"];
+    $password = $url["pass"];
+    $database = substr($url["path"], 1);
+}
 
 return [
 
