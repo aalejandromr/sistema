@@ -52,7 +52,7 @@
             }
         </style>
 @section('content')
-        <div class="flex-center position-ref full-height">
+        <div class="flex-center position-ref full-height" id="content-container">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -68,7 +68,7 @@
                           <div class="card z-depth-4">
                             <div class="card-content">
                               <div class="row" style="margin-bottom: 0px !important;">
-                                {!! Form::model($tipo, ['method' => 'POST', 'action' => ['TipoController@store']]) !!}
+                                {!! Form::model($tipo, ['method' => 'POST', 'action' => ['TipoController@store'],'id' => 'tiposForm']) !!}
                                 <div class="input-field">
                                     {!! Form::token() !!}
                                     {!! Form::label('name', 'Nombre del Tipo') !!}

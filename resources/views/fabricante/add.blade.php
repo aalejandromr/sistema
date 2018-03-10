@@ -68,7 +68,7 @@
                           <div class="card z-depth-4">
                             <div class="card-content">
                               <div class="row" style="margin-bottom: 0px !important;">
-                                {!! Form::model($fabricante, ['method' => 'POST', 'action' => ['FabricanteController@store']]) !!}
+                                {!! Form::model($fabricante, ['method' => 'POST', 'action' => ['FabricanteController@store'],'id' => 'fabriForm']) !!}
                                 <div class="input-field">
                                     {!! Form::token() !!}
                                     {!! Form::label('name', 'Nombre Fabricante') !!}

@@ -29,7 +29,7 @@ class DesignController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
         $design = new design;
@@ -38,6 +38,11 @@ class DesignController extends Controller
             'aplicacion' => Aplicacion::pluck('aplicacion', 'id'),
             'fabricantes' => Fabricante::pluck('name','id')
         );
+
+        if($request->ajax()){
+            return view('design.add', compact('design'))->with('data', $data)->renderSections()['content'];
+        }
+
         return view('design.add')->with('data', $data);
     }
 
@@ -60,16 +65,31 @@ class DesignController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails()){
+            if($request->ajax()){
+                return array('success' => false);
+            }
             return Redirect::to('add-construccion')
                 ->withErrors($validator);
         }
         else {
             $design = new Design;
-            $design->design = $request->design;
-            $design->aplicacion_id = $request->aplicacions[0];
-            $design->fabricante_id = $request->fabricantes[0];
-            $design->save();
-            return Redirect::to('bodega/dashboard/diseños')->with('message', 'Construccion agregada.');
+
+            if($request->ajax()){
+
+                $design->design = $request->design;
+                $design->aplicacion_id = $request->aplicacions[0];
+                $design->fabricante_id = $request->fabricantes[0];
+                if($aplicacion->save()) {
+                    return array('success' => true, 'id' => $aplicacion->id);
+                }
+
+            }else {
+                $design->design = $request->design;
+                $design->aplicacion_id = $request->aplicacions[0];
+                $design->fabricante_id = $request->fabricantes[0];
+                $design->save();
+                return Redirect::to('bodega/dashboard/diseños')->with('message', 'Construccion agregada.');
+            }
         }
     }
 

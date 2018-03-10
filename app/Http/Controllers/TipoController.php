@@ -28,10 +28,15 @@ class TipoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
-        $tipo = new Tipo;
+        
+                $tipo = new Tipo;
+                        //
+        if($request->ajax()){
+            return view('tipo.add', compact('tipo'))->renderSections()['content'];
+        }
+
         return view('tipo.add')->with('tipo', $tipo);
     }
 
@@ -50,14 +55,30 @@ class TipoController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails()){
+    
+            if($request->ajax()){
+                return array('success' => false);
+            }
+
             return Redirect::to('add-tipo')
                 ->withErrors($validator);
-        }
-        else {
+        }else {
+
             $tipo = new Tipo;
-            $tipo->name = $request->name;
-            $tipo->save();
-            return Redirect::to('bodega/dashboard/tipos')->with('message', 'Tipo agregado.');
+       
+            if($request->ajax()){
+
+                $tipo->name = $request->name;
+                if($tipo->save()) {
+                    return array('success' => true, 'id' => $tipo->id);
+                }
+
+            }else {
+
+                $tipo->name = $request->name;
+                $tipo->save();
+               return Redirect::to('bodega/dashboard/tipos')->with('message', 'Tipo agregado.');
+            }
         }
     }
 
