@@ -116,6 +116,14 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::patch('llantero/dashboard/update/eje/{id}', 'EjeController@update')->name('update-eje');
 
 	Route::get('llantero/dashboard/eje-distribucino/{id}', 'EjeDistributionController@index')->name('ejes-por-distribucion');
+
+	Route::get('super/dashboard/empresas', 'EmpresaController@index')->name('all-empresas');
+	Route::get('super/dashboard/add/empresa', 'EmpresaController@create')->name('add-empresa');
+	Route::post('super/dashboard/add/empresa', 'EmpresaController@store')->name('add-empresa');
+	Route::get('super/dashboard/edit/empresa/{id}', 'EmpresaController@edit')->name('edit-empresa');
+	Route::patch('super/dashboard/update/empresa/{id}', 'EmpresaController@update')->name('update-empresa');
+	Route::get('super/dashboard/delete/empresa/{id}', 'EmpresaController@delete')->name('delete-empresa');
+
 	//Route::get('llantero/dashboard/add/eje-distribucino/{id}', 'EjeDistributionController@create')->name('add-aplicacion');
 	//Route::post('llantero/dashboard/add/eje-distribucino/{id}', 'EjeDistributionController@store')->name('add-aplicacion');
 	//Route::get('llantero/dashboard/edit/eje-distribucino/{id}', 'EjeDistributionController@edit')->name('edit-aplicacion');
