@@ -127,13 +127,13 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('administracion/dashboard/add/empresa', 'EmpresaController@store')->name('add-empresa');
 	Route::get('administracion/dashboard/edit/empresa/{id}', 'EmpresaController@edit')->name('edit-empresa');
 	Route::patch('administracion/dashboard/update/empresa/{id}', 'EmpresaController@update')->name('update-empresa');
-/*
-	Route::get('bodega/dashboard/aplicaciones', 'AplicacionController@index')->name('all-aplicaciones');
-	Route::get('bodega/dashboard/add/aplicacion', 'AplicacionController@create')->name('add-aplicacion');
-	Route::post('bodega/dashboard/add/aplicacion', 'AplicacionController@store')->name('add-aplicacion');
-	Route::get('bodega/dashboard/edit/aplicacion/{id}', 'AplicacionController@edit')->name('edit-aplicacion');
-	Route::patch('bodega/dashboard/update/aplicacion/{id}', 'AplicacionController@update')->name('update-aplicacion');
 
+	Route::get('bodega/dashboard/sucursales', 'SucursalController@index')->name('all-sucursales');
+	Route::get('bodega/dashboard/add/sucursal', 'SucursalController@create')->name('add-sucursal');
+	Route::post('bodega/dashboard/add/sucursal', 'SucursalController@store')->name('add-sucursal');
+	Route::get('bodega/dashboard/edit/sucursal/{id}', 'SucursalController@edit')->name('edit-sucursal');
+	Route::patch('bodega/dashboard/update/sucursal/{id}', 'SucursalController@update')->name('update-sucursal');
+/*
 	Route::get('bodega/dashboard/aplicaciones', 'AplicacionController@index')->name('all-aplicaciones');
 	Route::get('bodega/dashboard/add/aplicacion', 'AplicacionController@create')->name('add-aplicacion');
 	Route::post('bodega/dashboard/add/aplicacion', 'AplicacionController@store')->name('add-aplicacion');

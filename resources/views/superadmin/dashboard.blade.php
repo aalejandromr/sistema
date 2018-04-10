@@ -1,18 +1,4 @@
-@extends('layouts.app')
-
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
+@extends('layouts.administracion.app')
         <style>
             html, body {
                 background-color: #fff;
@@ -65,13 +51,12 @@
                 margin-bottom: 30px;
             }
         </style>
-    </head>
-    <body>
+@section('content')
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
@@ -81,9 +66,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Welcome Super Admin
+                    Welcome Llantero
                 </div>
             </div>
         </div>
-    </body>
-</html>
+@endsection
