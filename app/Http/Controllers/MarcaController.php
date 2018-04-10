@@ -27,8 +27,12 @@ class MarcaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(Request $request)
+    {   
+        if($request->ajax()){
+            return view('bodega.marca.add', compact('marca'))->renderSections()['content'];
+        }
+
         //
         return view('bodega.marca.add');
     }
@@ -48,14 +52,30 @@ class MarcaController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails()){
-            return Redirect::to('add_marca')
-                ->withErrors($validator);
+
+            if($request->ajax()){
+                array('success' => false);
+            }else{
+                return Redirect::to('add_marca')
+                    ->withErrors($validator);
+            }
         }
         else {
             $marca = new Marca;
-            $marca->marca = $request->marca;
-            $marca->save();
-            return Redirect::to('bodega/dashboard/marcas')->with('message', 'Marca agregada.');
+
+            if($request->ajax()){
+
+                $marca->marca = $request->marca;
+                if($marca->save()) {
+                    return array('success' => true, 'id' => $marca->id);
+                }
+
+            }else {
+
+                $marca->marca = $request->marca;
+                $marca->save();
+                return Redirect::to('bodega/dashboard/marcas')->with('message', 'Marca agregada.');
+            }
         }
     }
 

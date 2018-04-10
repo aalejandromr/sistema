@@ -27,10 +27,15 @@ class AplicacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Request $request)
+    {   
+                //
         $aplicacion = new Aplicacion;
+
+        if($request->ajax()){
+            return view('aplicacion.add', compact('aplicacion'))->renderSections()['content'];
+        }
+
         return view('aplicacion.add')->with('aplicacion', $aplicacion);
     }
 
@@ -41,24 +46,47 @@ class AplicacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+
         //
         $rules = array(
             'aplicacion' => 'required'
         );
 
+
         $validator = Validator::make($request->all(), $rules);
+        
         if($validator->fails()){
-            return Redirect::to('add-aplicacion')
-                ->withErrors($validator);
+                
+            if($request->ajax()){
+                return array('success' => false);
+            }else{
+                return Redirect::to('add-aplicacion')
+                ->withErrors($validator);    
+            }
+            
         }
         else {
+
             $aplicacion = new Aplicacion;
-            $aplicacion->aplicacion = $request->aplicacion;
-            $aplicacion->save();
-            return Redirect::to('bodega/dashboard/aplicaciones')->with('message', 'aplicacion agregada.');
-        }
+
+            if($request->ajax()){
+
+                $aplicacion->aplicacion = $request->aplicacion;
+                if($aplicacion->save()) {
+                    return array('success' => true, 'id' => $aplicacion->id);
+                }
+
+            }else {
+
+                $aplicacion->aplicacion = $request->aplicacion;
+                $aplicacion->save();
+                return Redirect::to('bodega/dashboard/aplicaciones')->with('message', 'aplicacion agregada.');
+            }//ELSE AJAX
+
+        }//FINAL ELSE VALIDATOR
     }
+
 
     /**
      * Display the specified resource.

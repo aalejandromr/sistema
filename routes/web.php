@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 	Route::get('bodega/dashboard/medidas', 'MedidaController@index')->name('all-medidas');
 	Route::get('bodega/dashboard/add/medida', 'MedidaController@create')->name('add-medida');
-	Route::post('bodega/dashboard/add/medida', 'MedidaController@store')->name('add-medida');
+	Route::post('bodega/dashboard/add/medida', 'MedidaController@store')->name('add-medida');//find
 	Route::get('bodega/dashboard/edit/medida/{id}', 'MedidaController@edit')->name('edit-medida');
 	Route::patch('bodega/dashboard/update/{id}', 'MedidaController@update')->name('update-medida');
 	Route::get('bodega/dashboard/delete/{id}', 'MedidaController@delete')->name('delete-medida');
@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('bodega/dashboard/delete/tipo/{id}', 'TipoController@delete')->name('delete-tipo');
 
 	Route::get('bodega/dashboard/fabricantes', 'FabricanteController@index')->name('all-fabricantes');
-	Route::get('bodega/dashboard/add/fabricante', 'FabricanteController@create')->name('add-fabricante');
+	Route::get('bodega/dashboard/add/fabricante', 'FabricanteController@create')->name('add-fabricante');//find
 	Route::post('bodega/dashboard/add/fabricante', 'FabricanteController@store')->name('add-fabricante');
 	Route::get('bodega/dashboard/edit/fabricante/{id}', 'FabricanteController@edit')->name('edit-fabricante');
 	Route::patch('bodega/dashboard/update/fabricante/{id}', 'FabricanteController@update')->name('update-fabricante');
@@ -107,19 +107,19 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('llantero/dashboard/edit/eje/{id}', 'EjeController@edit')->name('edit-eje');
 	Route::patch('llantero/dashboard/update/eje/{id}', 'EjeController@update')->name('update-eje');
 
-	Route::get('llantero/dashboard/eje-distribucino/{id}', 'EjeDistributionController@index')->name('ejes-por-distribucion');
-	//Route::get('llantero/dashboard/add/eje-distribucino/{id}', 'EjeDistributionController@create')->name('add-aplicacion');
-	//Route::post('llantero/dashboard/add/eje-distribucino/{id}', 'EjeDistributionController@store')->name('add-aplicacion');
-	//Route::get('llantero/dashboard/edit/eje-distribucino/{id}', 'EjeDistributionController@edit')->name('edit-aplicacion');
-	//Route::patch('llantero/dashboard/update/eje-distribucino/{id}', 'EjeDistributionController@update')->name('update-aplicacion');
+	Route::get('llantero/dashboard/eje-distribucion/{id}', 'EjeDistributionController@index')->name('ejes-por-distribucion');
+	//Route::get('llantero/dashboard/add/eje-distribucion/{id}', 'EjeDistributionController@create')->name('add-aplicacion');
+	//Route::post('llantero/dashboard/add/eje-distribucion/{id}', 'EjeDistributionController@store')->name('add-aplicacion');
+	//Route::get('llantero/dashboard/edit/eje-distribucion/{id}', 'EjeDistributionController@edit')->name('edit-aplicacion');
+	//Route::patch('llantero/dashboard/update/eje-distribucion/{id}', 'EjeDistributionController@update')->name('update-aplicacion');
 
+
+	Route::get('administracion/dashboard/empresas', 'EmpresaController@index')->name('all-empresas');
+	Route::get('administracion/dashboard/add/empresa', 'EmpresaController@create')->name('add-empresa');
+	Route::post('administracion/dashboard/add/empresa', 'EmpresaController@store')->name('add-empresa');
+	Route::get('administracion/dashboard/edit/empresa/{id}', 'EmpresaController@edit')->name('edit-empresa');
+	Route::patch('administracion/dashboard/update/empresa/{id}', 'EmpresaController@update')->name('update-empresa');
 /*
-	Route::get('bodega/dashboard/aplicaciones', 'AplicacionController@index')->name('all-aplicaciones');
-	Route::get('bodega/dashboard/add/aplicacion', 'AplicacionController@create')->name('add-aplicacion');
-	Route::post('bodega/dashboard/add/aplicacion', 'AplicacionController@store')->name('add-aplicacion');
-	Route::get('bodega/dashboard/edit/aplicacion/{id}', 'AplicacionController@edit')->name('edit-aplicacion');
-	Route::patch('bodega/dashboard/update/aplicacion/{id}', 'AplicacionController@update')->name('update-aplicacion');
-
 	Route::get('bodega/dashboard/aplicaciones', 'AplicacionController@index')->name('all-aplicaciones');
 	Route::get('bodega/dashboard/add/aplicacion', 'AplicacionController@create')->name('add-aplicacion');
 	Route::post('bodega/dashboard/add/aplicacion', 'AplicacionController@store')->name('add-aplicacion');

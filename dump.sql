@@ -1,22 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 4.6.6
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Generation Time: Feb 10, 2018 at 10:02 PM
--- Server version: 5.7.17
--- PHP Version: 7.0.24
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
 -- Database: `db_skyfleeter`
 --
 
@@ -54,7 +36,6 @@ INSERT INTO `medidas` (`id`, `medida`, `created_at`, `updated_at`) VALUES
 
 --
 -- Dumping data for table `aplicacions`
---
 
 INSERT INTO `aplicacions` (`id`, `aplicacion`, `created_at`, `updated_at`) VALUES
 (1, 'Aplicacion Prueba Editado', '2018-01-15 00:05:25', '2018-01-15 00:06:16');
@@ -68,12 +49,20 @@ INSERT INTO `construccions` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (2, 'Test construccion', '2018-01-09 10:12:53', '2018-01-09 10:12:53');
 
 --
+-- Dumping data for table `fabricantes`
+--
+
+INSERT INTO `fabricantes` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Fabricante prueba editado', '2018-01-15 00:37:20', '2018-01-15 00:40:18');
+
+--
 -- Dumping data for table `designs`
 --
 
 INSERT INTO `designs` (`id`, `design`, `aplicacion_id`, `fabricante_id`, `created_at`, `updated_at`) VALUES
 (1, 'Prueba design editado', 1, 1, '2018-01-14 20:16:57', '2018-01-23 10:50:34'),
 (2, 'Test Design 2', 1, 1, '2018-01-23 10:22:45', '2018-01-23 10:50:41');
+
 
 --
 -- Dumping data for table `distributions`
@@ -109,6 +98,35 @@ INSERT INTO `eje_distributions` (`id`, `eje_id`, `distribution_id`, `created_at`
 (4, 1, 1, '2018-02-08 16:16:58', '2018-02-08 16:16:59', 1, 1);
 
 --
+-- Dumping data for table `empresas`
+--
+
+INSERT INTO `empresas` (`id`, `descripcion`, `vigente`, `fecha_facturacion`, `ultimo_pago`, `created_at`, `updated_at`) VALUES
+(1, 'Empresa Test 1', 1, '2017-12-31', '2017-11-29 00:00:00', '2017-12-11 04:19:52', '2017-12-11 04:19:52');
+
+
+--
+-- Dumping data for table `marcas`
+--
+
+INSERT INTO `marcas` (`id`, `marca`, `created_at`, `updated_at`) VALUES
+(1, 'Test Editado', '2018-01-08 00:10:19', '2018-01-09 09:04:07'),
+(2, 'Marca', '2018-01-09 09:04:27', '2018-01-16 07:04:08'),
+(3, 'Marca II', '2018-01-09 09:05:27', '2018-01-09 09:05:27'),
+(4, 'Micheline', '2018-01-16 07:03:23', '2018-01-16 07:03:23'),
+(5, 'toyo', '2018-01-16 07:03:41', '2018-01-16 07:03:41');
+
+--
+-- Dumping data for table `medidas`
+--
+
+INSERT INTO `medidas` (`id`, `medida`, `created_at`, `updated_at`) VALUES
+(1, 'Test editado medida', '2018-01-09 09:28:33', '2018-01-09 09:42:46');
+
+--
+-- Dumping data for table `migrations`
+--
+
 -- Dumping data for table `tipos`
 --
 
@@ -137,7 +155,6 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `creat
 (11, 'LLNTR', 'llantero@administracion.com', '$2y$10$X6OnGgsx8XAE.wG2BmQLn.c6PqC9WgCObKeDPxUl8wd04wXtL5szy', '9d56IsZj3x5lNoK7tus24FJQFD6VLUK0BOKvYMqRHGz6cCdca1TzD1cjFGSC', '2017-12-20 08:27:40', '2017-12-20 08:27:40', 1, 0, '2017-12-20', 4),
 (12, 'EDBG', 'encargado_bodega@administracion.com', '$2y$10$CjtcGRZiEHE8ldZuTNy5bu1J2WPJGnFkMs8KMNYP2QP/B6wd9g2pq', 'J6hVtQRxHayebpfti1dc5xosLwiP57NCIKy1wb8Bs2TiagKsuEuvbAgpIpP4', '2017-12-20 08:29:29', '2017-12-20 08:29:29', 1, 0, '2017-12-20', 5);
 
---
 -- Dumping data for table `almacens`
 --
 
@@ -145,7 +162,3 @@ INSERT INTO `almacens` (`id`, `marca_id`, `medida_id`, `dot`, `profundidad`, `co
 (1, 1, 1, '1006', '0', 1, 1, 1, 3, '', NULL, NULL),
 (2, 3, 1, 'DOT', 'Prof', 2, 1, 2, 3, 'N/A', '2018-01-24 00:24:59', '2018-01-24 00:24:59'),
 (3, 2, 1, 'DOTRGSTR', '93', 2, 1, 2, NULL, NULL, '2018-01-28 08:55:59', '2018-01-28 08:55:59');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

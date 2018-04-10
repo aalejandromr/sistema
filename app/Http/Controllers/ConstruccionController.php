@@ -27,10 +27,14 @@ class ConstruccionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
         $construccion = new Construccion;
+
+        if($request->ajax()){
+            return view('construccion.add', compact('construccion'))->with('construccion', $construccion)->renderSections()['content'];
+        }
         return view('construccion.add')->with('construccion', $construccion);
     }
 
@@ -48,15 +52,29 @@ class ConstruccionController extends Controller
         );
 
         $validator = Validator::make($request->all(), $rules);
-        if($validator->fails()){
-            return Redirect::to('add-construccion')
-                ->withErrors($validator);
+         if($validator->fails()){
+                
+            if($request->ajax()){
+                return array('success' => false);
+            }else{
+                return Redirect::to('add-construccion')
+                    ->withErrors($validator);
+            }
         }
         else {
+
             $construccion = new Construccion;
-            $construccion->name = $request->name;
-            $construccion->save();
-            return Redirect::to('bodega/dashboard/construcciones')->with('message', 'Construccion agregada.');
+            if($request->ajax()){
+                $construccion->name = $request->name;
+                if($construccion->save()) {
+                    return array('success' => true, 'id' => $construccion->id);
+                }
+
+            }else {
+                $construccion->name = $request->name;
+                $construccion->save();
+                return Redirect::to('bodega/dashboard/construcciones')->with('message', 'Construccion agregada.');
+            }
         }
     }
 

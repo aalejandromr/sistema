@@ -126,6 +126,7 @@
                 </div>
     <script type="text/javascript">
         $(document).ready(function(){
+            console.log("HOLI FF")
             console.log($('select[name="designs[]"]'));
             $.ajaxSetup({
                 headers: {

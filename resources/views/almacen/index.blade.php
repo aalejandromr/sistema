@@ -50,6 +50,14 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            .search-container{
+                width: 50%;
+                display: inline-flex;
+            }
+            .text-center{
+                text-align: center;
+            }
+
         </style>
 @section('content')
     @if(session()->has('message'))
@@ -73,6 +81,11 @@
                 <div class="title m-b-md">
                     Almacen
                 </div>
+                <div class="search-container input-field">
+                    <input type="search" id="txtSearcher" class="text-center">
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                </div>
+                <div class="data-container">
                 <table class="striped col s10 offset-s1">
                     <thead>
                       <tr>
@@ -92,9 +105,9 @@
 
                     <tbody>
                         @foreach($almacens as $almacen)
-                          <tr>
+                          <tr class="tr-item">
                             <td>{{ $almacen->id }}</td>
-                            <td>{{ $almacen->marcas->marca }}</td>
+                            <td class="td-marca">{{ $almacen->marcas->marca }}</td>
                             <td>{{ $almacen->medidas->medida }}</td>
                             <td>{{ $almacen->dot }}</td>
                             <td>{{ $almacen->profundidad }}</td>
@@ -102,7 +115,7 @@
                             <td>{{ $almacen->tipos->name }}</td>
                             <td>{{ $almacen->designs->design }}</td>
                             <td>{{ $almacen->designs->aplicaciones->aplicacion }}</td>
-                            <td>{{ $almacen->designs->fabricantes->name }}</td>
+                            <td class="td-fabricante">{{ $almacen->designs->fabricantes->name }}</td>
 
                             <td>
                                 <a href="{{route('edit-llanta', array('llanta' => $almacen->id)) }}"> <i class="tinny material-icons">edit</i> </a>  
@@ -112,10 +125,37 @@
                         @endforeach
 
 
-                  </tbody>
-                </table>
-                {{ $almacens->links() }}
-            </div>
+                    </tbody>
+                    </table>
+                        {{ $almacens->links() }}
+                    </div>
+                </div>
+                
         </div>
+        <script type="text/javascript">
+        $(document).ready(function(){
+        
+            $('#txtSearcher').keyup(function(){
+                var marca           = $('.td-marca');
+                var fabricante      = $('.td-fabricante');
+                var buscando        = $(this).val();
+                var itemMarca       ='';
+                var itemFabricante  ='';
+
+                for( var i = 0; i < fabricante.length; i++ ){
+                    itemMarca       = $(marca[i]).html();
+                    itemFabricante  = $(fabricante[i]).html();
+
+                    for(var x = 0; x < itemMarca.length; x++ ){
+                        if( buscando.length == 0 || itemFabricante.indexOf( buscando ) > -1 || itemMarca.indexOf( buscando ) > -1 ){
+                            $(marca[i]).parents('.tr-item').show(); 
+                        }else{
+                            $(marca[i]).parents('.tr-item').hide();
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 
 @endsection

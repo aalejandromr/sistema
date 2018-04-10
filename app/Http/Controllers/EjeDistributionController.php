@@ -18,6 +18,7 @@ class EjeDistributionController extends Controller
         //
         $ejes = 
         EjeDistribucion::where(['distribution_id' => $id])
+        ->orderBy("distribution_position_id", "ASC")
         ->orderBy("posicion", "ASC")
         ->get();
         $eje = Distribution::find($id)->name;
@@ -79,9 +80,19 @@ class EjeDistributionController extends Controller
      * @param  \App\eje_distribution  $eje_distribution
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, eje_distribution $eje_distribution)
+    public function update(Request $request, int $eje_distribution)
     {
         //
+        $obj = $request["data"];
+        //dd($obj);
+        foreach ($obj as $value) {
+            //$ejeDistribution = EjeDistribucion::find($value[0]);
+            //$ejeDistribution->eje_id = $value[1];
+            //$ejeDistribution->distribution_id = $value[2];
+            //$ejeDistribution->posicion = $value[3];
+            //$ejeDistribution->distribution_position_id = $value[4];
+            //$ejeDistribution->save();
+        }
     }
 
     /**
