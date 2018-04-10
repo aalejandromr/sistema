@@ -1,30 +1,4 @@
-use sistemadellantas_development;
--- phpMyAdmin SQL Dump
--- version 4.6.6
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Generation Time: Feb 10, 2018 at 10:02 PM
--- Server version: 5.7.17
--- PHP Version: 7.0.24
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---almacens
--- Database: `SistemaDeLlantas_development`
---
-
---
-
--- Dumping data for table `aplicacions`
---
 
 INSERT INTO `aplicacions` (`id`, `aplicacion`, `created_at`, `updated_at`) VALUES
 (1, 'Aplicacion Prueba Editado', '2018-01-15 00:05:25', '2018-01-15 00:06:16');
@@ -38,12 +12,20 @@ INSERT INTO `construccions` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (2, 'Test construccion', '2018-01-09 10:12:53', '2018-01-09 10:12:53');
 
 --
+-- Dumping data for table `fabricantes`
+--
+
+INSERT INTO `fabricantes` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Fabricante prueba editado', '2018-01-15 00:37:20', '2018-01-15 00:40:18');
+
+--
 -- Dumping data for table `designs`
 --
 
 INSERT INTO `designs` (`id`, `design`, `aplicacion_id`, `fabricante_id`, `created_at`, `updated_at`) VALUES
 (1, 'Prueba design editado', 1, 1, '2018-01-14 20:16:57', '2018-01-23 10:50:34'),
 (2, 'Test Design 2', 1, 1, '2018-01-23 10:22:45', '2018-01-23 10:50:41');
+
 
 --
 -- Dumping data for table `distributions`
@@ -85,12 +67,6 @@ INSERT INTO `eje_distributions` (`id`, `eje_id`, `distribution_id`, `created_at`
 INSERT INTO `empresas` (`id`, `descripcion`, `vigente`, `fecha_facturacion`, `ultimo_pago`, `created_at`, `updated_at`) VALUES
 (1, 'Empresa Test 1', 1, '2017-12-31', '2017-11-29 00:00:00', '2017-12-11 04:19:52', '2017-12-11 04:19:52');
 
---
--- Dumping data for table `fabricantes`
---
-
-INSERT INTO `fabricantes` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Fabricante prueba editado', '2018-01-15 00:37:20', '2018-01-15 00:40:18');
 
 --
 -- Dumping data for table `marcas`
