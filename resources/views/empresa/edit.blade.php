@@ -68,9 +68,9 @@
                           <div class="card z-depth-4">
                             <div class="card-content">
                               <div class="row" style="margin-bottom: 0px !important;">
-                                {!! Form::model($eje, ['method' => 'PATCH', 'action' => ['EjeController@update',$eje->id]]) !!}
+                                {!! Form::model($empresa, ['method' => 'PATCH', 'action' => ['EmpresaController@update',$empresa->id]]) !!}
                                     {!! Form::token() !!}
-                                    {!! Form::text('name') !!}
+                                    {!! Form::text('descripcion') !!}
                                     {{ Form::button('<i class="material-icons right">send</i> Editar', ['type' => 'submit', 'class' => 'btn waves-effect waves-light'] )  }}    
                                 {!! Form::close() !!}
                                   </div>

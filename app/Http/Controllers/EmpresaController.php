@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Empresa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 
 class EmpresaController extends Controller
 {
@@ -27,11 +29,10 @@ class EmpresaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
         $empresa = new Empresa;
-
          if($request->ajax()){
 
             return view('empresa.add', compact('empresa'))->renderSections()['content'];
@@ -53,7 +54,6 @@ class EmpresaController extends Controller
         $rules = array(
             'descripcion' => 'required'
         );
-
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails()){
              if($request->ajax()){
@@ -66,17 +66,27 @@ class EmpresaController extends Controller
         else {
 
             $empresa = new Empresa;
-
+            
             if($request->ajax()){
+                
+                $empresa->descripcion       = $request->descripcion;
+                $empresa->vigente           = 1; //DEFAULT VALUE
+                $empresa->fecha_facturacion = date(now());
+                $empresa->ultimo_pago       = date(now());
+                $empresa->created_at        = date(now());
 
-                $empresa->descripcion = $request->descripcion;
                 if($empresa->save()) {
                     return array('success' => true, 'id' => $empresa->id);
                 }
 
             }else {
 
-                $empresa->descripcion = $request->descripcion;
+                $empresa->descripcion       = $request->descripcion;
+                $empresa->vigente           = 1; //DEFAULT VALUE
+                $empresa->fecha_facturacion = date(now());
+                $empresa->ultimo_pago       = date(now());
+                $empresa->created_at        = date(now());
+
                 $empresa->save();
                 return Redirect::to('administracion/dashboard/empresas')->with('message', 'Empresa agregada.');
             }
