@@ -1,11 +1,11 @@
-@extends('layouts.administracion.app')
+@extends('layouts.bodeguero.app')
         <style>
             html, body {
                 background-color: #fff;
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
-                height: 100vh;
+                height: 100vh;s
                 margin: 0;
             }
 
@@ -52,11 +52,16 @@
             }
         </style>
 @section('content')
+    @if(session()->has('message'))
+        <div class="message" data-type="success" data-message="{{ session()->get('message') }}">
+
+        </div>
+    @endif
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/') }}">Home</a>
+                        <a href="{{ route('add-sucursal') }}">Add</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
@@ -64,10 +69,40 @@
                 </div>
             @endif
 
-            <div class="content">
+            <div class="content row">
                 <div class="title m-b-md">
-                    Welcome Llantero
+                    Almacen
                 </div>
+                <table class="striped col s12">
+                    <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Nombre Sucursal</th>
+                          <th>Empresa</th>
+                          <th>Fecha Expiracion</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach($sucursales as $sucursal)
+                          <tr>
+                            <td>{{ $sucursal->id }}</td>
+                            <td>{{ $sucursal->sucursal_name }}</td>
+                            <td>{{ $sucursal->expired_on }}</td>
+                            <td>{{ $sucursal->empresas->descripcion }}</td>
+
+                            <td>
+                                <a href="{{route('edit-sucursal', array('sucursal' => $sucursal->id)) }}"> <i class="tinny material-icons">edit</i> </a>  
+                                <a href=""> <i class="tinny material-icons">delete_forever</i> </a>
+                            </td>
+                          </tr>
+                        @endforeach
+
+
+                  </tbody>
+                </table>
+                {{ $sucursales->links() }}
             </div>
         </div>
+
 @endsection
