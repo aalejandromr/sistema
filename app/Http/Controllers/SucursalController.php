@@ -95,6 +95,25 @@ class SucursalController extends Controller
     public function update(Request $request, int $sucursal)
     {
         //
+        
+        $rules = array(
+            'sucursal_name' => 'required',
+            'empresas' => 'required'
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+        if($validator->fails()){
+            return Redirect::to('add-sucursal')
+                ->withErrors($validator);
+        }
+        else {
+            $sucursal = Sucursal::find($sucursal);
+            $sucursal->sucursal_name = $request->sucursal_name;
+            $sucursal->empresa_id = $request->empresas[0];
+            $sucursal->save();
+            return Redirect::to('bodega/dashboard/sucursales')->with('message', 'Sucursal agregada.');
+        }
+
     }
 
     /**

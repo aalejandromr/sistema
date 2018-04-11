@@ -1,4 +1,4 @@
-    @extends('layouts.bodeguero.app')
+    @extends('layouts.administracion.app')
         <style>
             html, body {
                 background-color: #fff;
